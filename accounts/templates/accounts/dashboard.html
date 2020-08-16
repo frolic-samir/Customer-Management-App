@@ -1,5 +1,55 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
-    <h1>Dashboard</h1>
+    <div class="row mt-3">
+        <div class="col">
+        <div class="card">
+            <h5 class="card-header text-center">Products</h5>
+            <div class="card-body">                
+                <p class="card-text"></p>               
+            </div>
+            </div>
+        </div>
+        <div class="col">
+        <div class="card">
+            <h5 class="card-header text-center">Products</h5>
+            <div class="card-body">                
+                <p class="card-text"></p>               
+            </div>
+            </div>
+        </div>
+        <div class="col">
+        <div class="card">
+            <h5 class="card-header text-center">Products</h5>
+            <div class="card-body">                
+                <p class="card-text"></p>               
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-5">
+            <h5>Customer</h5>
+            <hr>
+            <table class="table table-success table-striped">
+                <tr>
+                    <th>Name</th>
+                    <th>Contact</th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-7">
+            <h5>Last 5 Orders</h5>
+            <hr>
+            <table class="table table-success table-striped">
+                <tr>
+                    <th>Id</th>
+                    <th>Product</th>
+                    <th>Status</th>
+                </tr>
+            </table>
+        </div>
+    </div>
 {% endblock content %}
