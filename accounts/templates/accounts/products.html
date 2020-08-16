@@ -1,0 +1,23 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+    <h4 class='display-5 my-3'>Products</h4>
+    <div class="row card">
+        <div class="col">
+            <table class='table '>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+                {% for i in products %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td> {{ i.category }} </td>
+                        <td><strong>Rs.</strong> {{ i.price }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock content %}
