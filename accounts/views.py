@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, Customer, Order
+from .forms import OrderForm
 
 # Create your views here.
 
@@ -12,7 +13,7 @@ def home(request):
     delivered = order.filter(status='Delivered').count()
     pending = order.filter(status='Pending').count()
     context = {
-        'order': order,
+        'orders': order,
         'customer': customer,
         'total_order': total_order,
         'delivered': delivered,
@@ -40,3 +41,38 @@ def customer(request, customer_id):
         'orders_count': orders_count,
     }
     return render(request, 'accounts/customers.html', context)
+
+
+def createOrder(request):
+    form = OrderForm()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {
+        'form': form,
+        'create': 'Create Order',
+    }
+    return render(request, 'accounts/orderForm.html', context)
+
+
+def updateOrder(request, pk):
+    order = get_object_or_404(Order, id=pk)
+    form = OrderForm(instance=order)
+    if request.method == 'POST':
+        form = OrderForm(request.POST, instance=order)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {
+        'form': form,
+        'update': 'Update Order',
+    }
+    return render(request, 'accounts/orderForm.html', context)
+
+
+def deleteOrder(request, id):
+    order = get_object_or_404(Order, id=id)
+    order.delete()
+    return redirect('home')
