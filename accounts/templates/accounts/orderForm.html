@@ -1,9 +1,41 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
-    <form action="" method='post'>
+    <form class="row bg-white p-3 mt-3 g-3" method='post'>
         {% csrf_token %}
-        {{ form }}
-        <input type="submit" value={% if create %}"{{create}}" {% else %}"{{update}}"{% endif %} %}>
+        {% if create %}
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <div class="col-md-3">
+                    <label class="form-label">{{form.product.label}}</label><br>
+                    {{form.product}}
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">{{form.status.label}}</label><br>
+                    {{form.status}}         
+                </div>
+                <div class="col-md-6"></div>
+            {% endfor %}
+            <div class="col-12">
+                <input type="submit" class='btn btn-success btn-sm mt-2' value='Create Order'>
+            </div>
+        {% elif update %}
+            <div class="col-md-3">
+                <label class="form-label">{{form.customer.label}}</label>
+                {{form.customer}}
+            </div> 
+            <div class="col-md-3">
+                <label class="form-label">{{form.product.label}}</label><br>
+                {{form.product}}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">{{form.status.label}}</label><br>
+                {{form.status}}         
+            </div>
+            <div class="col-12">
+                <input type="submit" class='btn btn-success btn-sm mt-2' value='Update Order'>
+            </div>
+
+        {% endif %}
     </form>
 {% endblock content %}

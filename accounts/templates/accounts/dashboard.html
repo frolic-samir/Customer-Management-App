@@ -37,13 +37,15 @@
             </div>
             <table class="table table-success table-striped">
                 <tr>
+                    <th></th>
                     <th>Customer</th>
-                    <th>Orders</th>
+                    <th>Phone</th>
                 </tr>
                 {% for c in customer %}
                     <tr>
-                        <td> <a class='text-decoration-none text-dark' href="{% url 'customer' c.id %}"> {{ c.name }} </a></td>
-                        <td> {{ c.order_set.all.count }} </td>
+                        <td><a class='btn btn-info btn-sm' href="{% url 'customer' c.id %}">View</a></td>
+                        <td> {{ c.name }} </a></td>
+                        <td> {{ c.contact }} </td>
                     </tr>
                 {% endfor %}
             </table>
@@ -51,10 +53,7 @@
 
         <div class="col-md-8">
             <h5>Last 5 Orders</h5>
-            <hr>
-            <div class='border d-flex flex-fill'>
-                <a class='btn btn-primary btn-sm mb-1 flex-fill' href="{% url 'create_order' %}">Create Order</a>
-            </div>
+            <hr>            
             <table class="table table-success table-striped">
                 <tr>
                     <th>Product</th>
