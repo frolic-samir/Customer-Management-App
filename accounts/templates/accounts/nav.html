@@ -5,12 +5,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
+    {% if request.user.is_staff %}
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" id='home' aria-current="page" href="{% url 'home' %}">Dashboard</a>
         </li>    
         <li class="nav-item">
           <a class="nav-link" id='products' href="{% url 'products' %}">Products</a>
+        </li>
+      </ul>
+    {% endif %}
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class='nav-link text-white'>Hello, {{request.user.username|default:'Guest'}}</a>
+        </li>    
+        <li class="nav-item">
+          <a class="nav-link" id='products' href="{% url 'logout' %}">Log Out</a>
         </li>
       </ul>
     </div>
