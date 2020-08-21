@@ -16,6 +16,7 @@
                     <input type="password" class='form-control' name='password' required>
                     <input type="submit" class='btn btn-primary btn-sm mt-2 mb-3' value="Login">                    
                 </form>
+                <small>Forgot password?<a class='ml-2 text-decoration-none' href="{% url 'password_reset' %}">Reset Password</a></small> 
                 <small>Need an account?<a class='ml-2 text-decoration-none' href="{% url 'register' %}">Sign Up</a></small> 
             </div>
         </div>

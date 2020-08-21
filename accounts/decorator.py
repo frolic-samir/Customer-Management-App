@@ -34,4 +34,6 @@ def admin_only(view_func):
             return redirect('user')
         elif group == 'admin':
             return view_func(request, *args, **kwargs)
+        else:
+            return HttpResponse("Identify yourself. Invalid user")
     return wrap_fun

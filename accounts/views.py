@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.forms import inlineformset_factory
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout, authenticate, models
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.contrib.auth.models import Group
 from .models import Product, Customer, Order
-from .forms import OrderForm, CreateUserForm
+from .forms import OrderForm, CreateUserForm, CustomerForm
 from .filter import filterQuerySet
 from .decorator import unauthenticate_user, allowed_user, admin_only
 
@@ -35,8 +34,6 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            group = Group.objects.get(name='customer')
-            user.groups.add(group)
             return redirect('home')
     context = {
         'form': form
@@ -156,5 +153,29 @@ def deleteOrder(request, id):
 @login_required
 @allowed_user(allowed_one=['customer'])
 def user(request):
-    context = {}
+    orders = request.user.customer.order_set.all()
+    total_order = orders.count()
+    delivered = orders.filter(status='Delivered').count()
+    pending = orders.filter(status='Pending').count()
+    context = {
+        'orders': orders,
+        'total_order': total_order,
+        'delivered': delivered,
+        'pending': pending,
+    }
     return render(request, 'accounts/user.html', context)
+
+
+def account_setting(request):
+    user = request.user.customer
+    form = CustomerForm(instance=user)
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('account')
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/account.html', context)

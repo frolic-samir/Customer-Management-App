@@ -1,33 +1,7 @@
 {% extends 'accounts/base.html' %}
 
 {% block content %}
-    <div class="row mt-3 g-2">
-        <div class="col-md-4">
-        <div class="card text-center">
-            <h5 class="card-header">Total Orders</h5>
-            <div class="card-body">                
-                <p class="card-text display-6"> {{ total_order }} </p>               
-            </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-        <div class="card text-center">
-            <h5 class="card-header">Orders Delivered</h5>
-            <div class="card-body">                
-                <p class="card-text display-6"> {{ delivered }} </p>
-            </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-        <div class="card text-center">
-            <h5 class="card-header">Orders Pending</h5>
-            <div class="card-body">                
-                <p class="card-text display-6"> {{ pending }} </p>
-            </div>
-            </div>
-        </div>
-    </div>
-
+    {% include 'accounts/status.html' %}
     <div class="row mt-4">
         <div class="col-md-4">
             <h5>Customer</h5>

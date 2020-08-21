@@ -19,6 +19,11 @@
         <li class="nav-item">
           <a class='nav-link text-white'>Hello, {{request.user.username|default:'Guest'}}</a>
         </li>    
+        {% if not request.user.is_staff %}
+          <li class="nav-item">
+            <a class='nav-link' href="{% url 'account' %}">Settings</a>
+          </li>    
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" id='products' href="{% url 'logout' %}">Log Out</a>
         </li>
