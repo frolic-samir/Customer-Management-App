@@ -20,10 +20,12 @@
                 <input type="submit" class='btn btn-success btn-sm mt-2' value='Create Order'>
             </div>
         {% elif update %}
-            <div class="col-md-3">
+          <!--  <div class="col-md-3">
                 <label class="form-label">{{form.customer.label}}</label>
                 {{form.customer}}
             </div> 
+            -->
+            {{ form.errors}}
             <div class="col-md-3">
                 <label class="form-label">{{form.product.label}}</label><br>
                 {{form.product}}
