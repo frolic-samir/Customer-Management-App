@@ -7,9 +7,17 @@ from .models import Customer
 
 @receiver(post_save, sender=User)
 def createCustomerProfile(sender, created, instance, **kwargs):
-    if created:
+    group_exist = Group.objects.exists()
+    if not group_exist:
+        Group.objects.create(name='admin')
+        Group.objects.create(name='customer')
+
+    if created and not instance.is_staff:
         group = Group.objects.get(name='customer')
         instance.groups.add(group)
         Customer.objects.create(user=instance, name=instance)
+    elif created and instance.is_staff:
+        group = Group.objects.get(name='admin')
+        instance.groups.add(group)
 
 # post_save.connect(createCustomerProfile,sender=User)

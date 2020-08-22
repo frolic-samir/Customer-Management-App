@@ -6,7 +6,12 @@
             <div class=" card card-body">
                 <h4 class='mb-4 display-6'>Login</h4>
                 {% for message in messages %}
-                    <p class='text-danger' >{{message}}</p>
+                    {% if message.tags == 'error'  %}                        
+                        <p class='text-danger' >{{message}}</p>
+                    {% elif message.tags == 'success' %}
+                        <p class='bg-success my-1 pl-1 text-white' >{{message}}</p>
+                    {% endif %}
+
                 {% endfor %}
                 <form action="" method='post' class='form'>
                     {% csrf_token %}

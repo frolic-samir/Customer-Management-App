@@ -21,7 +21,7 @@ def loginPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.info(request, 'Invalid username or password')
+            messages.error(request, 'Invalid username or password')
             return redirect('login')
     context = {}
     return render(request, 'accounts/login.html', context)
@@ -34,6 +34,7 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
+            messages.success(request, 'Account created.')
             return redirect('home')
     context = {
         'form': form
