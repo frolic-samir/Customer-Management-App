@@ -1,1 +1,1 @@
-web: gunicorn cma-sam.wsgi --log-file -
+web: gunicorn cma-liv.wsgi --log-file -
